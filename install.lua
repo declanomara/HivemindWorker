@@ -3,9 +3,12 @@ local filesystem = require("filesystem")
 local internet = require("internet")
 
 
-local install_url = "https://raw.githubusercontent.com/declanomara/HivemindWorker/master/install.lua"
-local main_url = "https://raw.githubusercontent.com/declanomara/HivemindWorker/master/main.lua"
-local autorun_url = "https://raw.githubusercontent.com/declanomara/HivemindWorker/master/autorun.lua"
+local github_url = "https://raw.githubusercontent.com/declanomara/HivemindWorker/master"
+local install_url = github_url.."/install.lua"
+local main_url = github_url.."/main.lua"
+local autorun_url = github_url.."/autorun.lua"
+local json_url = github_url.."/json.lua"
+local inspect_url = github_url.."/inspect.lua"
 
 
 function download_script (url, save_name)
@@ -23,6 +26,8 @@ function download_script (url, save_name)
 end
 
 function main ()
+    download_script(json_url, "/home/json.lua")
+    download_script(inspect_url, "/home/inspect.lua")
     download_script(install_url, "/home/install.lua")
     download_script(main_url, "/home/main.lua")
     download_script(autorun_url, "/autorun.lua")
