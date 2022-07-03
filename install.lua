@@ -23,8 +23,8 @@ function download_script (url, save_name)
 end
 
 function main ()
-    download_script(install_url, "install.lua")
-    download_script(main_url, "main.lua")
+    download_script(install_url, "/home/install.lua")
+    download_script(main_url, "/home/main.lua")
     download_script(autorun_url, "/autorun.lua")
 end
 
