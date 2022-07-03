@@ -1,4 +1,5 @@
 local computer = require("computer")
+local terminal = require("term")
 local internet = require("internet")
 local inspect = require("inspect")
 local json = require("json")
@@ -147,6 +148,7 @@ function handle_action (action)
     end
 
     if action["type"] == "move" then
+        print("Received movement instruction.")
         handle_movement(action)
     end
 
@@ -161,7 +163,19 @@ function handle_action (action)
 end
 
 
+function welcome_message ()
+    terminal.clear()
+    print("Hivemind v"..version)
+    print("UUID: "..id)
+    print("")
+    print("Beginning tasks.")
+end
+
+
 function main ()
+    welcome_message()
+
+    print("Registering robot with server...")
     local registration = register()
     if registration["success"] == "false" then
         if registration["error"] ~= "uuid already registered" then
@@ -180,6 +194,8 @@ function main ()
 
     end
 end
+
+version = "0.1a"
 
 id = computer.address()
 url = "http://localhost:8000"
