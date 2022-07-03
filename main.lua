@@ -8,7 +8,7 @@ local robot_api = require("robot")
 
 id = computer.address()
 url = "http://localhost:8000"
-pos = {x=0, y=0, z=0, facing=0}
+pos = load_position()
 
 
 function save_position ()
@@ -60,6 +60,8 @@ function update_status ()
 end
 
 function update_position (amt, dir)
+    save_position ()
+
     if dir == 0 then
         pos.x = pos.x + amt
         return true
