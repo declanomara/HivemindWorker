@@ -12,11 +12,20 @@ function save_position ()
     return true
 end
 
-function load_position ()
+function _load_position ()
     local file = io.open("/home/pos.txt", "r")
     local pos_string = file:read()
     pos = json.decode(pos_string)
     return true
+end
+
+function load_position ()
+    local ran, result = pcall(_load_position)
+    if not ran then
+        return {x=0, y=0, z=0, facing=0}
+    else
+        return result
+    end
 end
 
 function args_to_uri (args)
