@@ -16,7 +16,7 @@ function _load_position ()
     local file = io.open("/home/pos.txt", "r")
     local pos_string = file:read()
     pos = json.decode(pos_string)
-    return true
+    return pos
 end
 
 function load_position ()
@@ -137,6 +137,30 @@ function handle_movement (action)
 end
 
 
+function handle_action (action)
+    if action["type"] == "register" then
+        register()
+    end
+
+    if action["type"] == "ping" then
+        update_status()
+    end
+
+    if action["type"] == "move" then
+        handle_movement(action)
+    end
+
+    if action["type"] == "null" then
+        local current_time = os.time()
+        if (current_time - wait_msg_interval) > prev_waiting_time then
+            print("Awaiting further instructions...")
+            prev_waiting_time = current_time
+        end
+    end
+
+end
+
+
 function main ()
     local registration = register()
     if registration["success"] == "false" then
@@ -149,22 +173,10 @@ function main ()
         local actions = get_actions()
 
         for _, action in ipairs(actions) do
-            if action["type"] == "register" then
-                register()
-            end
-
-            if action["type"] == "ping" then
-                update_status()
-            end
-
-            if action["type"] == "move" then
-                handle_movement(action)
-            end
-
-            print(action["type"])
+            handle_action(action)
         end
 
-        os.sleep(1)
+        os.sleep(0.05)
 
     end
 end
@@ -172,5 +184,8 @@ end
 id = computer.address()
 url = "http://localhost:8000"
 pos = load_position()
+
+prev_waiting_time = 0
+wait_msg_interval = 5
 
 main()
