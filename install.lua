@@ -22,3 +22,5 @@ function main ()
     download_script(install_url, "install.lua")
     download_script(main_url, "main.lua")
 end
+
+main()
