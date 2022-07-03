@@ -153,6 +153,8 @@ function handle_action (action)
     if action["type"] == "null" then
         local current_time = os.time()
         if (current_time - wait_msg_interval) > prev_waiting_time then
+            print("current:"..current_time)
+            print("prev:"..prev_waiting_time)
             print("Awaiting further instructions...")
             prev_waiting_time = current_time
         end
