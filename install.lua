@@ -4,7 +4,7 @@ local internet = require("internet")
 
 
 local install_url = "https://raw.githubusercontent.com/declanomara/HivemindWorker/master/install.lua"
-local main_url = "https://github.com/declanomara/HivemindWorker/blob/master/main.lua"
+local main_url = "https://raw.githubusercontent.com/declanomara/HivemindWorker/master/main.lua"
 
 
 function download_script (url, save_name)
