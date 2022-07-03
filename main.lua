@@ -5,12 +5,6 @@ local json = require("json")
 local robot_api = require("robot")
 
 
-
-id = computer.address()
-url = "http://localhost:8000"
-pos = load_position()
-
-
 function save_position ()
     local file = io.open("/home/pos.txt", "w")
     file:write(json.encode(pos))
@@ -165,5 +159,9 @@ function main ()
 
     end
 end
+
+id = computer.address()
+url = "http://localhost:8000"
+pos = load_position()
 
 main()
